@@ -5,7 +5,6 @@ import lib.Pair;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 public class Restaurant extends Store {
     public HashMap<String, Collection<Pair<String, Integer>>> recipes = new HashMap<>();
@@ -19,12 +18,10 @@ public class Restaurant extends Store {
         Collection<Pair<String, Integer>> purchase = new ArrayList<>();
         for (Pair orderItem : order) {
             int qtyAvail = getQuantityAvailable((String) orderItem.left);
-            if (qtyAvail > (int) orderItem.right) {
+            if (qtyAvail != 0 && qtyAvail > (int) orderItem.right) {
                 purchase.add(orderItem);
                 deductSupplies((String) orderItem.left, (Integer) orderItem.right);
-            } else if (qtyAvail == 0) {
-                //do nothing
-            } else {
+            } else if (qtyAvail != 0) {
                 purchase.add(new Pair<>((String) orderItem.left, qtyAvail));
                 deductSupplies((String) orderItem.left, qtyAvail);
             }

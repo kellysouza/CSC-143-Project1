@@ -23,41 +23,42 @@ public class Hotel extends Building implements Residential, Rentable, Business {
         this.company = company;
     }
 
-    /* YOUR CODE HERE */
-
     @Override
     public void setCompany(String company) {
-
+        this.company = company;
     }
 
     @Override
     public String getCompany() {
-        return null;
+        return this.company;
     }
 
     @Override
     public void registerRental(String occupant) {
-
+        this.rentals.add(occupant);
     }
 
     @Override
     public void endRental(String occupant) {
-
+        this.rentals.remove(occupant);
+        this.moveOut(occupant);
     }
 
     @Override
     public void moveIn(String occupant) {
-
+        if (this.rentals.contains(occupant)) {
+            this.occupants.add(occupant);
+        }
     }
 
     @Override
     public void moveOut(String occupant) {
-
+        this.occupants.remove(occupant);
     }
 
     @Override
     public Collection<String> getOccupants() {
-        return null;
+        return this.occupants;
     }
 
 }
