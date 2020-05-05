@@ -39,16 +39,21 @@ public class Supermarket extends Store {
         Collection<Pair<String, Integer>> itemsFulfilled = new ArrayList<>();
         for (Pair pair : order) {
             if (this.supplies.containsKey(pair.left)) {
-//                String itemOrdered = (String)pair.left;
-//                int quantityOrdered = (Integer)pair.right;
-//                int quantityInStock = this.supplies.get(itemOrdered);
-//                int quantity = quantityInStock >= quantityOrdered ? quantityOrdered : quantityInStock;
-//                this.supplies.put(itemOrdered, quantityInStock - quantity);
-//                itemsFulfilled.add(new Pair(pair.left, quantity));
-
-                int quantity = this.supplies.get(pair.left) >= (int) pair.right ? (int) pair.right : this.supplies.get(pair.left);
-                this.supplies.put((String) pair.left, this.supplies.get(pair.left) - quantity);
+                String itemOrdered = (String) pair.left;
+                int quantityOrdered = (Integer) pair.right;
+                int quantityInStock = this.supplies.get(itemOrdered);
+                int quantity = quantityInStock >= quantityOrdered ? quantityOrdered : quantityInStock;
+                this.supplies.put(itemOrdered, quantityInStock - quantity);
                 itemsFulfilled.add(new Pair(pair.left, quantity));
+
+              /* Left this block here, as it works and uses fewer variables,
+                 so, if I had memory limit concerns, I would use this,
+                 but I feel it is not very readable.
+                 I am interested to know your thoughts on which one you would use.
+               */
+//                int quantity = this.supplies.get(pair.left) >= (int) pair.right ? (int) pair.right : this.supplies.get(pair.left);
+//                this.supplies.put((String) pair.left, this.supplies.get(pair.left) - quantity);
+//                itemsFulfilled.add(new Pair(pair.left, quantity));
             }
         }
         return itemsFulfilled;
